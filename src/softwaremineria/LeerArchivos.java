@@ -1,22 +1,27 @@
 package softwaremineria;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class LeerArchivos {
-    public static void muestraContenido(String archivo) throws FileNotFoundException, IOException {
-        String cadena;
+    public static String muestraContenido(String archivo) throws FileNotFoundException, IOException {
+        String cadena = "";
+        String aux;
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
-        while((cadena = b.readLine())!=null) {
-            System.out.println(cadena);
+        while((aux = b.readLine()) != null) {
+            cadena += aux;
         }
         b.close();
+        f.close();
+        return cadena;
     }
 
-    /*public static void main(String[] args) throws IOException {
-        muestraContenido("/usr/share/doc/weka/examples/");
-    }*/
+    public static void guardarContenido(String archivo, String info) throws IOException {
+        FileWriter f = new FileWriter(archivo);
+        BufferedWriter b = new BufferedWriter(f);
+        b.write(info);
+        f.close();
+    }
+
+
 }
